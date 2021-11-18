@@ -40,12 +40,14 @@ class CustomElevatedButton extends StatelessWidget {
   final String? text;
   final double? buttonHeigth;
   final double? buttonWidth;
+  final double? fontSize;
 
   const CustomElevatedButton({
     Key? key,
     this.text,
     this.buttonHeigth,
     this.buttonWidth,
+    this.fontSize,
   }) : super(key: key);
 
   @override
@@ -55,7 +57,10 @@ class CustomElevatedButton extends StatelessWidget {
       height: buttonHeigth,
       child: ElevatedButton(
         onPressed: () {},
-        child: Text("$text"),
+        child: Text(
+          "$text",
+          style: TextStyle(fontSize: fontSize),
+        ),
       ),
     );
   }

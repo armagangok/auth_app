@@ -1,3 +1,4 @@
+import 'package:call_me/App/views/view_register.dart';
 import 'package:flutter/material.dart';
 import 'App/views/view_login.dart';
 
@@ -10,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: const LoginView(),
+      home: const RegisterView(),
     );
   }
 }
