@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Future<dynamic> get(BuildContext context, pageName) {
+Future<dynamic> getTo(BuildContext context, pageName) {
   return Navigator.push(
     context,
     MaterialPageRoute(

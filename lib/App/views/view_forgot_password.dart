@@ -1,13 +1,13 @@
-
+import 'package:call_me/app/components/common/widgets_text.dart';
+import 'package:call_me/app/components/common/login_text_form_field.dart';
 import 'package:call_me/app/components/common/widget_buttons.dart';
-import 'package:call_me/app/views/view_forgot_password.dart';
+import 'package:call_me/app/components/common/widgets_text_controller.dart';
+import 'package:call_me/app/views/view_change_password.dart';
 import 'package:call_me/navigation/navigation.dart';
 import 'package:flutter/material.dart';
-import '../components/common/widgets_text.dart';
-import '../components/common/login_text_form_field.dart';
 
-class LoginView extends StatelessWidget {
-  const LoginView({Key? key}) : super(key: key);
+class ForgotPasswordView extends StatelessWidget {
+  const ForgotPasswordView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,44 +25,38 @@ class LoginView extends StatelessWidget {
                   children: [
                     Row(
                       children: const [
-                        CustomTextWidget(text: "Login", fontSize: 36),
+                        CustomTextWidget(
+                          text: "Forgot Password?",
+                          fontSize: 36,
+                        ),
                       ],
                     ),
                     const SizedBox(height: 40),
                     Row(children: const [Text("Email")]),
-                    const TextFormFieldWidget(),
-                    const SizedBox(height: 20),
-                    Row(children: const [Text("Password")]),
-                    const TextFormFieldWidget(),
+                    TextFormFieldWidget(
+                      textController: textControllers.emailForgotPassword,
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         CustomTextButton(
-                          text: "Forgot Password?",
-                          onPressed: () => getTo(context,const ForgotPasswordView()),
+                          text: "Send Code to E-mail",
+                          onPressed: () => print("e-mail sent"),
                         ),
                       ],
                     ),
-                    Row(
-                      children: [
-                        LoginIconButton(
-                          icon: Image.asset("assets/images/google.png"),
-                        ),
-                        LoginIconButton(
-                          icon: Image.asset("assets/images/apple.png"),
-                        ),
-                        LoginIconButton(
-                          icon: Image.asset("assets/images/fb.png"),
-                        ),
-                      ],
+                    Row(children: const [Text("Enter Code")]),
+                    TextFormFieldWidget(
+                      textController: textControllers.enterCode,
                     ),
+                    const SizedBox(height: 20),
                     CustomElevatedButton(
                       radius: 10,
-                      text: "Login",
+                      text: "Next",
                       fontSize: 16,
-                      buttonHeigth: 40,
                       buttonWidth: MediaQuery.of(context).size.width,
-                      onPressed: () => print("tapped"),
+                      buttonHeigth: 40,
+                      onPressed: () => getTo(context, ChangePasswordView()),
                     ),
                     const SizedBox(height: 20),
                   ],

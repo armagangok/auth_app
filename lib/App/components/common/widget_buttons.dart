@@ -21,16 +21,20 @@ class LoginIconButton extends StatelessWidget {
 
 class CustomTextButton extends StatelessWidget {
   final String? text;
+  final Widget? viewName;
+  final Function? onPressed;
 
   const CustomTextButton({
     Key? key,
     this.text,
+    this.viewName,
+    this.onPressed,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextButton(
-      onPressed: () {},
+      onPressed: () => onPressed!(),
       child: Text("$text"),
     );
   }
@@ -41,6 +45,8 @@ class CustomElevatedButton extends StatelessWidget {
   final double? buttonHeigth;
   final double? buttonWidth;
   final double? fontSize;
+  final double? radius;
+  final Function onPressed;
 
   const CustomElevatedButton({
     Key? key,
@@ -48,6 +54,8 @@ class CustomElevatedButton extends StatelessWidget {
     this.buttonHeigth,
     this.buttonWidth,
     this.fontSize,
+    this.radius,
+    required this.onPressed,
   }) : super(key: key);
 
   @override
@@ -56,7 +64,14 @@ class CustomElevatedButton extends StatelessWidget {
       width: buttonWidth,
       height: buttonHeigth,
       child: ElevatedButton(
-        onPressed: () {},
+        style: ButtonStyle(
+          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(radius ?? 0),
+            ),
+          ),
+        ),
+        onPressed: () => onPressed(),
         child: Text(
           "$text",
           style: TextStyle(fontSize: fontSize),
