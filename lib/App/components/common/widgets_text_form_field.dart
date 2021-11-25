@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 
 class TextFormFieldWidget extends StatelessWidget {
   final TextEditingController? textController;
+  final bool? isObsecure;
+  final Function? validate;
 
   const TextFormFieldWidget({
     Key? key,
     this.textController,
+    this.isObsecure,
+    this.validate,
   }) : super(key: key);
 
   @override
@@ -13,6 +17,8 @@ class TextFormFieldWidget extends StatelessWidget {
     return SizedBox(
       height: 40,
       child: TextFormField(
+        // validator: validate,
+        obscureText: isObsecure ?? false,
         controller: textController,
         decoration: InputDecoration(
           border: OutlineInputBorder(
