@@ -33,11 +33,13 @@ class ChangePasswordView extends StatelessWidget {
                     Row(children: const [Text("new password")]),
                     TextFormFieldWidget(
                       textController: textControllers.newpassword1,
+                      valueCatcher: textControllers.setnewpassword1,
                     ),
                     const SizedBox(height: 20),
                     Row(children: const [Text("new password again")]),
                     TextFormFieldWidget(
                       textController: textControllers.newpassword2,
+                      valueCatcher: textControllers.setnewpassword2,
                     ),
                     const SizedBox(height: 20),
                     CustomElevatedButton(

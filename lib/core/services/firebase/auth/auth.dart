@@ -1,5 +1,9 @@
-import 'package:call_me/models/user_model.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
+import '../../../../app/components/common/widgets_text_controller.dart';
+import '../../../../app/navigation/navigation.dart';
+import '../../../../app/views/home/view_home.dart';
+import '../../../models/user_model.dart';
 
 final AuthService authService = AuthService();
 
@@ -22,9 +26,20 @@ class AuthService {
     }
   }
 
+  Future signInWithEmailAndPasword(context) async {
+    print(textControllers.emailLogin);
+    print(textControllers.passwordLogin);
+    var result = await _auth.signInWithEmailAndPassword(
+      email: textControllers.emailLogin.text,
+      password: textControllers.passwordLogin.text,
+    );
+
+    getTo(context, const HomeView());
+  }
+
   Future signOut() async {
     try {
-      await _auth.currentUser!.delete();
+      // await _auth.currentUser!.delete();
       return await _auth.signOut();
     } catch (error) {
       print("$error");

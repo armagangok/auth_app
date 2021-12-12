@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-final TextControllers textControllers = TextControllers();
+final textControllers = TextControllers();
 
 class TextControllers {
   final TextEditingController _usernameRegister = TextEditingController();
@@ -13,7 +13,6 @@ class TextControllers {
   final TextEditingController _enterCode = TextEditingController();
   final TextEditingController _newpassword1 = TextEditingController();
   final TextEditingController _newpassword2 = TextEditingController();
-  
 
   get usernameRegister => _usernameRegister;
   get emailRegister => _emailRegister;
@@ -25,4 +24,15 @@ class TextControllers {
   get enterCode => _enterCode;
   get newpassword1 => _newpassword1;
   get newpassword2 => _newpassword2;
+
+  setsetusernameRegister(String newVal) => _usernameRegister.text = newVal;
+  setemailRegister(String newVal) => _emailRegister.text = newVal;
+  setpasswordRegister1(String newVal) => _passwordRegister1.text = newVal;
+  setpasswordRegister2(String newVal) => _passwordRegister2.text = newVal;
+  setEmailLogin(String newVal) => _emailLogin.text = newVal;
+  setpasswordLogin(String newVal) => _passwordLogin.text = newVal;
+  setemailForgotPassword(String newVal) => _emailForgotPassword.text = newVal;
+  setenterCode(String newVal) => _enterCode.text = newVal;
+  setnewpassword1(String newVal) => _newpassword1.text = newVal;
+  setnewpassword2(String newVal) => _newpassword2.text = newVal;
 }

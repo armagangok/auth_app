@@ -1,10 +1,7 @@
-import 'package:call_me/app/components/common/form_keys.dart';
-import 'package:call_me/app/components/common/widget_buttons.dart';
-import 'package:call_me/app/components/common/widgets_text_controller.dart';
-import 'package:call_me/app/components/widgets/stacks_register_view.dart';
-import 'package:call_me/app/navigation/navigation.dart';
-import 'package:call_me/services/firebase/tools/firebase_tools.dart';
 import 'package:flutter/material.dart';
+import '../../components/common/form_keys.dart';
+import '../../components/common/widget_buttons.dart';
+import '../../components/common/widgets_text_controller.dart';
 
 class RegisterView extends StatelessWidget {
   const RegisterView({Key? key}) : super(key: key);
@@ -26,7 +23,7 @@ class RegisterView extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      const RegisterTextFieldStack(),
+                      // const RegisterTextFieldStack(),
                       CustomElevatedButton(
                         radius: 10,
                         text: "Register",
@@ -43,7 +40,7 @@ class RegisterView extends StatelessWidget {
                         },
                       ),
                       const SizedBox(height: 20),
-                      const RegisterLoginButtonStack(),
+                      // const RegisterLoginButtonStack(),
                     ],
                   ),
                 ),

@@ -1,10 +1,11 @@
-import 'package:call_me/app/components/common/widgets_text.dart';
-import 'package:call_me/app/components/common/widgets_text_form_field.dart';
-import 'package:call_me/app/components/common/widget_buttons.dart';
-import 'package:call_me/app/components/common/widgets_text_controller.dart';
-import 'package:call_me/app/navigation/navigation.dart';
 import 'package:flutter/material.dart';
-import 'view_change_password.dart';
+import '../../components/common/widget_buttons.dart';
+import '../../components/common/widgets_text.dart';
+import '../../components/common/widgets_text_controller.dart';
+import '../../components/common/widgets_text_form_field.dart';
+import '../../navigation/navigation.dart';
+import './view_change_password.dart';
+
 
 class ForgotPasswordView extends StatelessWidget {
   const ForgotPasswordView({Key? key}) : super(key: key);
@@ -35,6 +36,7 @@ class ForgotPasswordView extends StatelessWidget {
                     Row(children: const [Text("Email")]),
                     TextFormFieldWidget(
                       textController: textControllers.emailForgotPassword,
+                      valueCatcher: textControllers.setemailForgotPassword,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
@@ -48,6 +50,7 @@ class ForgotPasswordView extends StatelessWidget {
                     Row(children: const [Text("Enter Code")]),
                     TextFormFieldWidget(
                       textController: textControllers.enterCode,
+                      valueCatcher: textControllers.setenterCode,
                     ),
                     const SizedBox(height: 20),
                     CustomElevatedButton(
@@ -56,7 +59,7 @@ class ForgotPasswordView extends StatelessWidget {
                       fontSize: 16,
                       buttonWidth: MediaQuery.of(context).size.width,
                       buttonHeigth: 40,
-                      onPressed: () => getTo(context, ChangePasswordView()),
+                      onPressed: () => getTo(context, const ChangePasswordView()),
                     ),
                     const SizedBox(height: 20),
                   ],
