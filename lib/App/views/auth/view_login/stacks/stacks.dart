@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/services/firebase/auth/auth.dart';
+import '../../../../components/common/form_keys.dart';
 import '../../../../components/common/widget_buttons.dart';
 import '../../../../components/common/widgets_text.dart';
+import '../../../../components/common/widgets_text_controller.dart';
+import '../../../../components/common/widgets_text_form_field.dart';
 import '../../../../navigation/navigation.dart';
-import '../../view_register.dart';
+import '../../../home/view_home.dart';
+import '../../view_forgot_password/view_forgot_password.dart';
+import '../../view_register/view_register.dart';
 
-class LoginAnonStack extends StatelessWidget {
-  const LoginAnonStack({
+class LoginAnonimStack extends StatelessWidget {
+  const LoginAnonimStack({
     Key? key,
   }) : super(key: key);
 
@@ -40,8 +45,8 @@ class LoginAnonStack extends StatelessWidget {
   }
 }
 
-class LoginWithStack extends StatelessWidget {
-  const LoginWithStack({
+class LoginWithConnectionStack extends StatelessWidget {
+  const LoginWithConnectionStack({
     Key? key,
   }) : super(key: key);
 
@@ -84,6 +89,45 @@ class RegisterStack extends StatelessWidget {
           ),
         )
       ],
+    );
+  }
+}
+
+class LoginWithEmailPasswordStack extends StatelessWidget {
+  const LoginWithEmailPasswordStack({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: formKeyPart.getFormKeyLogin,
+      child: Column(
+        children: [
+          Row(children: const [CustomTextWidget(text: "Login", fontSize: 36)]),
+          const SizedBox(height: 40),
+          Row(children: const [Text("Email")]),
+          TextFormFieldWidget(valueCatcher: textControllers.setEmailLogin),
+          const SizedBox(height: 20),
+          Row(children: const [Text("Password")]),
+          TextFormFieldWidget(valueCatcher: textControllers.setpasswordLogin),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              CustomTextButton(
+                text: "Forgot Password?",
+                onPressed: () => getTo(context, const ForgotPasswordView()),
+              ),
+            ],
+          ),
+          CustomElevatedButton(
+            radius: 10,
+            text: "Login",
+            fontSize: 16,
+            buttonHeigth: 40,
+            buttonWidth: MediaQuery.of(context).size.width,
+            onPressed: () =>
+                authService.signinEmailAndPasword(const HomeView()),
+          ),
+        ],
+      ),
     );
   }
 }

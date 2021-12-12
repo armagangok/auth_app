@@ -26,14 +26,13 @@ class AuthService {
     }
   }
 
-  Future signInWithEmailAndPasword(context) async {
+  Future signinEmailAndPasword(context) async {
     print(textControllers.emailLogin);
     print(textControllers.passwordLogin);
     var result = await _auth.signInWithEmailAndPassword(
       email: textControllers.emailLogin.text,
       password: textControllers.passwordLogin.text,
-    );
-
+    );    
     getTo(context, const HomeView());
   }
 
