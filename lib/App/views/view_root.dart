@@ -13,7 +13,6 @@ class RootView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppUser? user = Provider.of<AppUser?>(context);
-    print(user);
     return FutureBuilder(
       future: _initialization,
       builder: (context, snapshot) {

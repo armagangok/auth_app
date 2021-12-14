@@ -7,7 +7,7 @@ import '../../../components/common/widgets_text_form_field.dart';
 
 class ChangePasswordView extends StatelessWidget {
   const ChangePasswordView({Key? key}) : super(key: key);
-
+  
   @override
   Widget build(BuildContext context) {
     return CommonWrapperWidget(
@@ -41,6 +41,7 @@ class ChangePasswordView extends StatelessWidget {
             buttonWidth: MediaQuery.of(context).size.width,
             buttonHeigth: 40,
             onPressed: () => print("changed"),
+            
           ),
           const SizedBox(height: 20),
         ],
@@ -48,3 +49,4 @@ class ChangePasswordView extends StatelessWidget {
     );
   }
 }
+

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../../../core/services/firebase/auth/auth.dart';
-import '../../../../components/common/form_keys.dart';
 import '../../../../components/common/widget_buttons.dart';
 import '../../../../components/common/widgets_text.dart';
 import '../../../../components/common/widgets_text_controller.dart';
@@ -11,10 +10,7 @@ import '../../view_forgot_password/view_forgot_password.dart';
 import '../../view_register/view_register.dart';
 
 class LoginAnonimStack extends StatelessWidget {
-  const LoginAnonimStack({
-    Key? key,
-  }) : super(key: key);
-
+  const LoginAnonimStack({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -27,13 +23,7 @@ class LoginAnonimStack extends StatelessWidget {
           onPressed: () async {
             dynamic result = await authService.signInAnon();
 
-            if (result == null) {
-              print("error signing in");
-            } else {
-              print("signed in");
-              print("RESULT =====> $result <=====");
-              print("${result.uid}");
-            }
+            print(result);
           },
           child: const CustomTextWidget(
             text: "Login",
@@ -46,10 +36,7 @@ class LoginAnonimStack extends StatelessWidget {
 }
 
 class LoginWithConnectionStack extends StatelessWidget {
-  const LoginWithConnectionStack({
-    Key? key,
-  }) : super(key: key);
-
+  const LoginWithConnectionStack({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -69,10 +56,7 @@ class LoginWithConnectionStack extends StatelessWidget {
 }
 
 class RegisterStack extends StatelessWidget {
-  const RegisterStack({
-    Key? key,
-  }) : super(key: key);
-
+  const RegisterStack({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -98,7 +82,6 @@ class LoginWithEmailPasswordStack extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: formKeyPart.getFormKeyLogin,
       child: Column(
         children: [
           Row(children: const [CustomTextWidget(text: "Login", fontSize: 36)]),
@@ -123,8 +106,11 @@ class LoginWithEmailPasswordStack extends StatelessWidget {
             fontSize: 16,
             buttonHeigth: 40,
             buttonWidth: MediaQuery.of(context).size.width,
-            onPressed: () =>
-                authService.signinEmailAndPasword(const HomeView()),
+            onPressed: () async {
+              if (await authService.signinEmailAndPasword() == true) {
+                getTo(context, const HomeView());
+              }
+            },
           ),
         ],
       ),

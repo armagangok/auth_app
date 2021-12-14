@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../../components/common/form_keys.dart';
+import '../../../../../core/services/firebase/auth/auth.dart';
 import '../../../../components/common/widget_buttons.dart';
 import '../../../../components/common/widgets_text.dart';
 import '../../../../components/common/widgets_text_controller.dart';
@@ -15,14 +15,10 @@ class RegisterWithEmailPasswordStack extends StatelessWidget {
         Row(children: const [CustomTextWidget(text: "Register", fontSize: 36)]),
         const SizedBox(height: 37),
         Row(children: const [Text("Username")]),
-        TextFormFieldWidget(
-          valueCatcher: textControllers.setusernameRegister,
-        ),
+        TextFormFieldWidget(valueCatcher: textControllers.setusernameRegister),
         const SizedBox(height: 20),
         Row(children: const [Text("Email")]),
-        TextFormFieldWidget(
-          valueCatcher: textControllers.setemailRegister,
-        ),
+        TextFormFieldWidget(valueCatcher: textControllers.setemailRegister),
         const SizedBox(height: 20),
         Row(children: const [Text("Password")]),
         TextFormFieldWidget(
@@ -43,12 +39,12 @@ class RegisterWithEmailPasswordStack extends StatelessWidget {
           buttonWidth: MediaQuery.of(context).size.width,
           buttonHeigth: 40,
           onPressed: () async {
-            if (formKeyPart.getFormKeyRegister.currentState.validate()) {
-              print(textControllers.passwordRegister1.text);
-              print(textControllers.passwordRegister2.text);
-              print(textControllers.emailRegister.text);
-              print(textControllers.usernameRegister.text);
-            } else {}
+            await authService.registerEmailAndPassword(
+              textControllers.emailRegister.text,
+              textControllers.passwordRegister1.text,
+              textControllers.passwordRegister2.text,
+              context,
+            );
           },
         ),
       ],

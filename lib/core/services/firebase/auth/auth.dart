@@ -1,4 +1,3 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../../../app/components/common/widgets_text_controller.dart';
 import '../../../../app/navigation/navigation.dart';
@@ -26,22 +25,52 @@ class AuthService {
     }
   }
 
-  Future signinEmailAndPasword(context) async {
-    print(textControllers.emailLogin);
-    print(textControllers.passwordLogin);
-    var result = await _auth.signInWithEmailAndPassword(
-      email: textControllers.emailLogin.text,
-      password: textControllers.passwordLogin.text,
-    );    
-    getTo(context, const HomeView());
+  Future<bool> signinEmailAndPasword() async {
+    try {
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: textControllers.emailLogin.text,
+        password: textControllers.passwordLogin.text,
+      );
+      return true;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+      }
+      return false;
+    }
+  }
+
+  Future<void> registerEmailAndPassword(
+    String email,
+    String password1,
+    String password2,
+    context,
+  ) async {
+    if (password1 == password2 && password1.length >= 6) {
+      try {
+        UserCredential userCredential = await FirebaseAuth.instance
+            .createUserWithEmailAndPassword(email: email, password: password1);
+        getTo(context, const HomeView());
+      } on FirebaseAuthException catch (e) {
+        if (e.code == 'weak-password') {
+          print('The password provided is too weak.');
+        } else if (e.code == 'email-already-in-use') {
+          print('The account already exists for that email.');
+        }
+      } catch (e) {}
+    } else {
+      print("passwords does not match");
+    }
   }
 
   Future signOut() async {
     try {
-      // await _auth.currentUser!.delete();
-      return await _auth.signOut();
+      _auth.currentUser!.isAnonymous ? await _auth.currentUser!.delete() : "";
+      await _auth.signOut();
     } catch (error) {
-      print("$error");
       return null;
     }
   }

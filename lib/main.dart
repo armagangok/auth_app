@@ -10,7 +10,7 @@ void main() async {
   runApp(const MyApp());
 }
 
-AppUser _user = AppUser(uid: '');
+final AppUser _user = AppUser(uid: '');
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
