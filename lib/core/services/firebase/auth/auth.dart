@@ -25,13 +25,28 @@ class AuthService {
     }
   }
 
+  Future<void> verify() async {
+    User? user = FirebaseAuth.instance.currentUser;
+
+    if (user != null && !user.emailVerified) {
+      await user.sendEmailVerification();
+    }
+  }
+
   Future<bool> signinEmailAndPasword() async {
     try {
-      UserCredential userCredential =
-          await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: textControllers.emailLogin.text,
-        password: textControllers.passwordLogin.text,
-      );
+      if (_auth.currentUser == null) {
+        UserCredential _userCredential =
+            await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: textControllers.emailLogin.text,
+          password: textControllers.passwordLogin.text,
+        );
+        if (_auth.currentUser!.emailVerified == true) {
+        } else {
+          print("verify email!");
+        }
+      } else {}
+
       return true;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
@@ -53,6 +68,7 @@ class AuthService {
       try {
         UserCredential userCredential = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email, password: password1);
+
         getTo(context, const HomeView());
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
@@ -63,6 +79,15 @@ class AuthService {
       } catch (e) {}
     } else {
       print("passwords does not match");
+    }
+  }
+
+  Future<void> resetPassword() async {
+    try {
+      await _auth.sendPasswordResetEmail(
+          email: textControllers.emailForgotPassword.text);
+    } catch (e) {
+      print(e);
     }
   }
 

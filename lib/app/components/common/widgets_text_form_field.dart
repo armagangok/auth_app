@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class TextFormFieldWidget extends StatefulWidget {
-  final TextEditingController? textController;
+
   final bool? isObsecure;
   final Function? validate;
   final Function valueCatcher;
 
   const TextFormFieldWidget({
     Key? key,
-    this.textController,
+
     this.isObsecure,
     this.validate,
     required this.valueCatcher,
@@ -27,7 +27,7 @@ class _TextFormFieldWidgetState extends State<TextFormFieldWidget> {
         
         onChanged: (value) => setState(() => widget.valueCatcher(value)),
         obscureText: widget.isObsecure ?? false,
-        controller: widget.textController,
+
         
         decoration: InputDecoration(
           border: OutlineInputBorder(

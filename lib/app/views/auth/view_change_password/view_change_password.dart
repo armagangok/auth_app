@@ -1,9 +1,9 @@
-import 'package:call_me/app/components/stacks/stacks.dart';
 import 'package:flutter/material.dart';
 import '../../../components/common/widget_buttons.dart';
 import '../../../components/common/widgets_text.dart';
 import '../../../components/common/widgets_text_controller.dart';
 import '../../../components/common/widgets_text_form_field.dart';
+import '../../../components/stacks/stacks.dart';
 
 class ChangePasswordView extends StatelessWidget {
   const ChangePasswordView({Key? key}) : super(key: key);
@@ -24,13 +24,13 @@ class ChangePasswordView extends StatelessWidget {
           const SizedBox(height: 40),
           Row(children: const [Text("new password")]),
           TextFormFieldWidget(
-            textController: textControllers.newpassword1,
+
             valueCatcher: textControllers.setnewpassword1,
           ),
           const SizedBox(height: 20),
           Row(children: const [Text("new password again")]),
           TextFormFieldWidget(
-            textController: textControllers.newpassword2,
+
             valueCatcher: textControllers.setnewpassword2,
           ),
           const SizedBox(height: 20),
@@ -41,7 +41,6 @@ class ChangePasswordView extends StatelessWidget {
             buttonWidth: MediaQuery.of(context).size.width,
             buttonHeigth: 40,
             onPressed: () => print("changed"),
-            
           ),
           const SizedBox(height: 20),
         ],

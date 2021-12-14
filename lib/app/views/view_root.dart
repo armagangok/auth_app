@@ -1,10 +1,9 @@
-import 'package:call_me/app/views/home/view_home.dart';
-import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../../core/models/user_model.dart';
 import 'auth/view_login/view_login.dart';
+import 'home/view_home.dart';
+import '../../core/models/user_model.dart';
 
 class RootView extends StatelessWidget {
   final Future<FirebaseApp> _initialization = Firebase.initializeApp();
