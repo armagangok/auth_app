@@ -23,7 +23,7 @@ class LoginAnonimStack extends StatelessWidget {
           onPressed: () async {
             dynamic result = await authService.signInAnon();
 
-            print(result);
+            debugPrint(result);
           },
           child: const CustomTextWidget(
             text: "Login",

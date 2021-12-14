@@ -1,9 +1,9 @@
+import 'package:call_me/app/navigation/navigation.dart';
+import 'package:call_me/app/views/home/view_home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../../../../app/components/common/widgets_text_controller.dart';
-import '../../../../app/navigation/navigation.dart';
-import '../../../../app/views/home/view_home.dart';
 import '../../../models/user_model.dart';
+import '../../../../app/components/common/widgets_text_controller.dart';
 
 final AuthService authService = AuthService();
 
@@ -21,16 +21,32 @@ class AuthService {
       User? user = result.user;
       return _userFromFirebase(user);
     } catch (error) {
-      print("==========> $error <==========");
+      debugPrint("==========> $error <==========");
       return null;
     }
   }
 
-  Future<void> verify() async {
-    User? user = FirebaseAuth.instance.currentUser;
-
-    if (user != null && !user.emailVerified) {
-      await user.sendEmailVerification();
+  Future<bool> verify() async {
+    try {
+      print("-----> user: ${_auth.currentUser}");
+      if (_auth.currentUser != null && _auth.currentUser!.emailVerified) {
+        await _auth.currentUser!.sendEmailVerification();
+        if (_auth.currentUser!.emailVerified == true) {
+          print(
+              "is email verified? ----------> ${_auth.currentUser!.emailVerified}");
+          return true;
+        } else {
+          print(
+              "is email verified? ----------> ${_auth.currentUser!.emailVerified}");
+          return false;
+        }
+      } else {
+        await _auth.currentUser!.sendEmailVerification();
+        return false;
+      }
+    } catch (e) {
+      debugPrint("---------> $e");
+      return false;
     }
   }
 
@@ -43,39 +59,34 @@ class AuthService {
           password: textControllers.passwordLogin.text,
         );
         if (_auth.currentUser!.emailVerified == true) {
+          return true;
         } else {
-          print("verify email!");
+          return false;
         }
       } else {}
 
       return true;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        print('No user found for that email.');
+        debugPrint('No user found for that email.');
       } else if (e.code == 'wrong-password') {
-        print('Wrong password provided for that user.');
+        debugPrint('Wrong password provided for that user.');
       }
       return false;
     }
   }
 
   Future<void> registerEmailAndPassword(
-    String email,
-    String password1,
-    String password2,
-    context,
-  ) async {
+      String email, String password1, String password2, context) async {
     if (password1 == password2 && password1.length >= 6) {
       try {
         UserCredential userCredential = await FirebaseAuth.instance
             .createUserWithEmailAndPassword(email: email, password: password1);
-
-        getTo(context, const HomeView());
       } on FirebaseAuthException catch (e) {
         if (e.code == 'weak-password') {
-          print('The password provided is too weak.');
+          debugPrint('The password provided is too weak.');
         } else if (e.code == 'email-already-in-use') {
-          print('The account already exists for that email.');
+          debugPrint('The account already exists for that email.');
         }
       } catch (e) {
         debugPrint("Error while registering user. => [$e]");
@@ -90,15 +101,45 @@ class AuthService {
       await _auth.sendPasswordResetEmail(
           email: textControllers.emailForgotPassword.text);
     } catch (e) {
-      print(e);
+      debugPrint("$e");
     }
   }
 
-  Future<void> updatePassword() async {
+  // Future<void> updatePassword() async {
+  //   try {
+  //     await _auth.currentUser!.updatePassword("testtest");
+  //   } catch (e) {
+  //     debugPrint("Error while updating password. => [$e]");
+  //     try {
+  //       String email = 'sample@example.com';
+  //       String password = 'samplepassword';
+
+  //       AuthCredential credential =
+  //           EmailAuthProvider.credential(email: email, password: password);
+
+  //       await _auth.currentUser!.reauthenticateWithCredential(credential);
+  //     } catch (e) {
+  //       debugPrint("$e");
+  //     }
+  //   }
+  // }
+
+  Future<void> updateEmail() async {
     try {
-      await _auth.currentUser!.updatePassword("testtest");
+      await _auth.currentUser!.updateEmail("test@test.com");
     } catch (e) {
       debugPrint("Error while updating password. => [$e]");
+      try {
+        String email = 'sample@example.com';
+        String password = 'samplepassword';
+
+        AuthCredential credential =
+            EmailAuthProvider.credential(email: email, password: password);
+
+        await _auth.currentUser!.reauthenticateWithCredential(credential);
+      } catch (e) {
+        debugPrint("$e");
+      }
     }
   }
 

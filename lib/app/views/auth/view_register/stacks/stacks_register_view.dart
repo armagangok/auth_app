@@ -4,6 +4,8 @@ import '../../../../components/common/widget_buttons.dart';
 import '../../../../components/common/widgets_text.dart';
 import '../../../../components/common/widgets_text_controller.dart';
 import '../../../../components/common/widgets_text_form_field.dart';
+import '../../../../navigation/navigation.dart';
+import '../../../home/view_home.dart';
 
 class RegisterWithEmailPasswordStack extends StatelessWidget {
   const RegisterWithEmailPasswordStack({Key? key}) : super(key: key);
@@ -45,6 +47,16 @@ class RegisterWithEmailPasswordStack extends StatelessWidget {
               textControllers.passwordRegister2.text,
               context,
             );
+
+            if (await authService.verify() == true) {
+              print("trueeeeee");
+              getTo(context, const HomeView());
+            } else {
+              print("falseeeeee");
+              return const Scaffold(
+                body: Center(child: CircularProgressIndicator()),
+              );
+            }
           },
         ),
       ],

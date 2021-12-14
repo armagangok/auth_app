@@ -40,7 +40,7 @@ class ChangePasswordView extends StatelessWidget {
             fontSize: 16,
             buttonWidth: MediaQuery.of(context).size.width,
             buttonHeigth: 40,
-            onPressed: () => print("changed"),
+            onPressed: () => debugPrint("changed"),
           ),
           const SizedBox(height: 20),
         ],
