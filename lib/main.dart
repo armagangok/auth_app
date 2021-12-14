@@ -1,4 +1,4 @@
-import 'package:call_me/app/views/view_root.dart';
+import 'package:call_me/app/views/root/view_root.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'core/initializing/initialize_app.dart';

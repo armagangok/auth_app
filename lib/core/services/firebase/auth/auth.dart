@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import '../../../../app/components/common/widgets_text_controller.dart';
 import '../../../../app/navigation/navigation.dart';
 import '../../../../app/views/home/view_home.dart';
@@ -76,9 +77,11 @@ class AuthService {
         } else if (e.code == 'email-already-in-use') {
           print('The account already exists for that email.');
         }
-      } catch (e) {}
+      } catch (e) {
+        debugPrint("Error while registering user. => [$e]");
+      }
     } else {
-      print("passwords does not match");
+      debugPrint("passwords does not match");
     }
   }
 
@@ -88,6 +91,14 @@ class AuthService {
           email: textControllers.emailForgotPassword.text);
     } catch (e) {
       print(e);
+    }
+  }
+
+  Future<void> updatePassword() async {
+    try {
+      await _auth.currentUser!.updatePassword("testtest");
+    } catch (e) {
+      debugPrint("Error while updating password. => [$e]");
     }
   }
 
