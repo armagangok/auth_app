@@ -1,8 +1,5 @@
 import 'package:call_me/app/components/common/widgets_text.dart';
 import 'package:flutter/material.dart';
-import '../../../../../core/services/firebase/auth/auth.dart';
-import '../../../../navigation/navigation.dart';
-import '../../../root/view_root.dart';
 
 class CustomDrawerWidget extends StatelessWidget {
   const CustomDrawerWidget({Key? key}) : super(key: key);
@@ -30,9 +27,7 @@ class CustomDrawerWidget extends StatelessWidget {
                 children: <Widget>[
                   const Text("My Account"),
                   IconButton(
-                    onPressed: () async {
-                      getTo(context, RootView());
-                    },
+                    onPressed: () async {},
                     icon: const Icon(Icons.person),
                   ),
                 ],
@@ -45,9 +40,7 @@ class CustomDrawerWidget extends StatelessWidget {
                 children: <Widget>[
                   const Text("Settings"),
                   IconButton(
-                    onPressed: () async {
-                      getTo(context, RootView());
-                    },
+                    onPressed: () async {},
                     icon: const Icon(Icons.settings),
                   ),
                 ],
@@ -61,8 +54,7 @@ class CustomDrawerWidget extends StatelessWidget {
                   const Text("Logout"),
                   IconButton(
                     onPressed: () async {
-                      await authService.signOut();
-                      getTo(context, RootView());
+                      // await authService.signOut();
                     },
                     icon: const Icon(Icons.logout),
                   ),

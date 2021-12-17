@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../../core/services/firebase/auth/auth.dart';
 import '../../../components/common/widget_buttons.dart';
 import '../../../components/common/widgets_text.dart';
 import '../../../components/common/widgets_text_controller.dart';
@@ -31,9 +30,9 @@ class ForgotPasswordView extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              CustomTextButton(
+               CustomTextButton(
                 text: "Send link to email.",
-                onPressed: () => authService.resetPassword(),
+                // onPressed: () => authService.resetPassword(),
               ),
             ],
           ),

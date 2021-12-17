@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../../../../core/services/firebase/auth/auth.dart';
 import '../../../../components/common/widget_buttons.dart';
 import '../../../../components/common/widgets_text.dart';
 import '../../../../components/common/widgets_text_controller.dart';
 import '../../../../components/common/widgets_text_form_field.dart';
-import '../../../../navigation/navigation.dart';
-import '../../../home/view_home.dart';
 
 class RegisterWithEmailPasswordStack extends StatelessWidget {
   const RegisterWithEmailPasswordStack({Key? key}) : super(key: key);
@@ -41,22 +38,22 @@ class RegisterWithEmailPasswordStack extends StatelessWidget {
           buttonWidth: MediaQuery.of(context).size.width,
           buttonHeigth: 40,
           onPressed: () async {
-            await authService.registerEmailAndPassword(
-              textControllers.emailRegister.text,
-              textControllers.passwordRegister1.text,
-              textControllers.passwordRegister2.text,
-              context,
-            );
+            // await register.registerEmailAndPassword(
+            //   textControllers.emailRegister.text,
+            //   textControllers.passwordRegister1.text,
+            //   textControllers.passwordRegister2.text,
+            //   context,
+            // );
 
-            if (await authService.verify() == true) {
-              print("trueeeeee");
-              getTo(context, const HomeView());
-            } else {
-              print("falseeeeee");
-              return const Scaffold(
-                body: Center(child: CircularProgressIndicator()),
-              );
-            }
+            // if (await verification.verify() == true) {
+            //   debugPrint("trueeeeee");
+            //   getTo(context, const HomeView());
+            // } else {
+            //   debugPrint("falseeeeee");
+            //   return const Scaffold(
+            //     body: Center(child: CircularProgressIndicator()),
+            //   );
+            // }
           },
         ),
       ],

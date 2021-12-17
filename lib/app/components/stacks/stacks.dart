@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 
 class CommonWrapperWidget extends StatelessWidget {
   final Widget child;
-  const CommonWrapperWidget({
-    Key? key,
-    required this.child,
-  }) : super(key: key);
+  const CommonWrapperWidget({Key? key, required this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +17,7 @@ class CommonWrapperWidget extends StatelessWidget {
               height: MediaQuery.of(context).size.height,
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: SingleChildScrollView(
-                  child: child,
-                ),
+                child: SingleChildScrollView(child: child),
               ),
             ),
           ),

@@ -17,7 +17,7 @@
 //               angle: 2 * (math.pi / 180),
 //               child: SvgPicture.asset(
 //                 'assets/images/Rectangle 2.svg',
-//                 semanticsLabel: 'rectangle2',
+//                 // semanticsLabel: 'rectangle2',
 //               ),
 //             ),
 //           ),

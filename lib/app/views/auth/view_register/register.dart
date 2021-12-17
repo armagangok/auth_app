@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../components/stacks/stacks.dart';
-import 'stacks/stacks_register_view.dart';
+import '../register/stacks/stacks_register.dart';
 
 class RegisterView extends StatelessWidget {
   const RegisterView({Key? key}) : super(key: key);
