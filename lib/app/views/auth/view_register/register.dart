@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../components/stacks/stacks.dart';
+import '../../stacks/stacks.dart';
 import '../register/stacks/stacks_register.dart';
 
 class RegisterView extends StatelessWidget {

@@ -9,13 +9,6 @@ class RootView extends StatelessWidget {
   RootView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Something went wrong."),
-      ),
-      body: Column(
-        children: [Center(child: LoginView())],
-      ),
-    );
+    return Scaffold();
   }
 }

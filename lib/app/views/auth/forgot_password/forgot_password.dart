@@ -3,7 +3,7 @@ import '../../../components/common/widget_buttons.dart';
 import '../../../components/common/widgets_text.dart';
 import '../../../components/common/widgets_text_controller.dart';
 import '../../../components/common/widgets_text_form_field.dart';
-import '../../../components/stacks/stacks.dart';
+import '../../stacks/stacks.dart';
 
 
 class ForgotPasswordView extends StatelessWidget {
