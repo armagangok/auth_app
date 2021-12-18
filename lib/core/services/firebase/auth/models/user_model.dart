@@ -1,9 +1,9 @@
-class ProcessedUser {
+class RenewedUser {
   final String id;
   final String? email;
   
 
-  ProcessedUser({
+  RenewedUser({
     required this.id,
     required this.email,
   });

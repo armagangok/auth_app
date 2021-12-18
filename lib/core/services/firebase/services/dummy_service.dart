@@ -1,8 +1,5 @@
-/* some dummy code*/
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import '../auth/models/user_model.dart';
 import 'auth_base.dart';
 
@@ -23,7 +20,7 @@ class DummyService implements AuthBase {
     if (user == null) {
       return null;
     } else {
-      return RenewedUser(email: user.email, id: user.uid);
+      return RenewedUser(email: 'sample@email.com', id: 'sample3546346346');
     }
   }
 

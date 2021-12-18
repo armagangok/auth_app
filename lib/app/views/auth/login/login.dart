@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../stacks/stacks.dart';
+import '../../../components/stacks/stacks.dart';
 import 'stacks/stacks.dart';
 
 class LoginView extends StatelessWidget {
