@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'package:call_me/core/services/firebase/services/auth_base.dart';
-
-import '../../../../../core/locator/locator.dart';
-import '../../../../../core/services/firebase/services/services.dart';
+import 'package:provider/provider.dart';
+import '../../../../../core/viewmodels/user_model.dart';
 import '../../../../components/common/widget_buttons.dart';
 import '../../../../components/common/widgets_text.dart';
 import '../../../../components/common/widgets_text_controller.dart';
@@ -12,22 +9,17 @@ import '../../../../navigation/navigation.dart';
 import '../../forgot_password/forgot_password.dart';
 import '../../view_register/register.dart';
 
-class LoginAnonimStack extends StatelessWidget {  
+class LoginAnonimStack extends StatelessWidget {
+  const LoginAnonimStack({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    AuthBase authService = locator<FirebaseAuthService>();
+    final _userModel = Provider.of<UserModel>(context);
     return Row(
       children: [
-        const CustomTextWidget(
-          text: "Login anonymously!",
-          fontSize: 16,
-        ),
+        const CustomTextWidget(text: "Login anonymously!", fontSize: 16),
         TextButton(
-          onPressed: () async => await authService.signinAnonim(),
-          child: const CustomTextWidget(
-            text: "Login",
-            fontSize: 16,
-          ),
+          onPressed: () async => await _userModel.signinAnonim(),
+          child: const CustomTextWidget(text: "Login", fontSize: 16),
         )
       ],
     );

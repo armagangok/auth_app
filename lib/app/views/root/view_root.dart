@@ -1,44 +1,43 @@
-import 'package:call_me/app/views/home/view_home.dart';
-import 'package:call_me/core/locator/locator.dart';
-import 'package:call_me/core/services/firebase/auth/models/user_model.dart';
-import 'package:call_me/core/services/firebase/services/auth_base.dart';
-import 'package:call_me/core/services/firebase/services/services.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../../core/viewmodels/user_model.dart';
 import '../auth/login/login.dart';
+import '../home/view_home.dart';
 
-class RootView extends StatefulWidget {
-  const RootView({Key? key}) : super(key: key);
-  @override
-  State<RootView> createState() => _RootViewState();
-}
-
-class _RootViewState extends State<RootView> {
-  RenewedUser? _user;
-  AuthBase authService = locator<FirebaseAuthService>();
-  @override
-  void initState() {
-    super.initState();
-    _updateUser();
-  }
+class RootView extends StatelessWidget {
+  RootView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if (_user == null) {
-      debugPrint("user in build method => $_user" "${_user?.id ?? ""}");
-      return LoginView();
+    final UserModel _userModel = Provider.of<UserModel>(context);
+    if (_userModel.state == ViewState.idle) {
+      if (_userModel.user == null) {
+        debugPrint("user is null");
+        return LoginView();
+      } else {
+        debugPrint("user is not null");
+        return HomeView();
+      }
     } else {
-      debugPrint("user in build method => $_user" "${_user?.id ?? ""}");
-      return HomeView();
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
     }
   }
-
-  void _checkUser(){
-
-  } 
-
-  void _updateUser() {
-    setState(() {
-      _user = authService.currentUser();
-    });
-  }
 }
+
+
+
+
+
+    //     if (_userModel.user == null) {
+    //   debugPrint("user is null");
+    //   debugPrint("user in build method => ${_userModel.user?.id}");
+    //   return LoginView();
+    // } else {
+    //   debugPrint(
+    //       "user in build method => [${_userModel.user?.id}]  is not null");
+    //   return HomeView();
+    // }

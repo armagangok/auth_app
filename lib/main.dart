@@ -1,6 +1,8 @@
-import 'package:call_me/app/views/root/view_root.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'app/views/root/view_root.dart';
 import 'core/initializing/initialize_app.dart';
+import 'core/viewmodels/user_model.dart';
 
 void main() async {
   await initApp();
@@ -15,7 +17,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(primarySwatch: Colors.orange),
-      home: const RootView(),
+      home: ChangeNotifierProvider(
+        create: (BuildContext context) => UserModel(),
+        child:  RootView(),
+      ),
     );
   }
 }

@@ -5,8 +5,6 @@ import '../../../components/stacks/stacks.dart';
 import 'stacks/stacks.dart';
 
 class LoginView extends StatelessWidget {
-  
-  
 
   @override
   Widget build(BuildContext context) {

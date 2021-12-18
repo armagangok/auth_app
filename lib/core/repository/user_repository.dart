@@ -10,7 +10,7 @@ class UserRepository implements AuthBase {
   final FirebaseAuthService _authService = locator<FirebaseAuthService>();
   final DummyService _dummyAuthService = locator<DummyService>();
 
-  AppMode appMode = AppMode.debug;
+  AppMode appMode = AppMode.release;
 
   @override
   RenewedUser? currentUser() {
