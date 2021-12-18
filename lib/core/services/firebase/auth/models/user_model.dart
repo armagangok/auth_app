@@ -1,5 +1,5 @@
 class RenewedUser {
-  final String id;
+  final String? id;
   final String? email;
   
 

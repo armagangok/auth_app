@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import '../auth/models/user_model.dart';
 import 'auth_base.dart';
 
-class DummyService implements AuthBase {
+class FirebaseAuthService implements AuthBase {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   @override
   RenewedUser? currentUser() {

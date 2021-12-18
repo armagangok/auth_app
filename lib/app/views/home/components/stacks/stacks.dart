@@ -1,10 +1,13 @@
-import 'package:call_me/app/components/common/widgets_text.dart';
+import 'package:call_me/core/services/firebase/services/auth_base.dart';
 import 'package:flutter/material.dart';
+import 'package:call_me/app/components/common/widgets_text.dart';
 
 class CustomDrawerWidget extends StatelessWidget {
-  const CustomDrawerWidget({Key? key}) : super(key: key);
+  final AuthBase authBase;
+  const CustomDrawerWidget({Key? key, required this.authBase})
+      : super(key: key);
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {    
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.5,
       child: Drawer(
@@ -53,9 +56,7 @@ class CustomDrawerWidget extends StatelessWidget {
                 children: <Widget>[
                   const Text("Logout"),
                   IconButton(
-                    onPressed: () async {
-                      // await authService.signOut();
-                    },
+                    onPressed: () async => authBase.signOut(),
                     icon: const Icon(Icons.logout),
                   ),
                 ],

@@ -1,15 +1,24 @@
+import 'package:call_me/core/services/firebase/auth/models/user_model.dart';
 import 'package:flutter/material.dart';
+import '../../../core/locator/locator.dart';
+import '../../../core/services/firebase/services/auth_base.dart';
+import '../../../core/services/firebase/services/services.dart';
 import 'components/stacks/stacks.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    AuthBase authService = locator<FirebaseAuthService>();
+    final RenewedUser? currentUSer = authService.currentUser();
     return Scaffold(
-      drawer: const CustomDrawerWidget(),
+      drawer: CustomDrawerWidget(authBase: authService),
       appBar: AppBar(title: const Text("Home Screen!")),
-      body: Column(children: const []),
+      body: Column(
+        children: [
+          Text("Welcome to homescreen! ${currentUSer?.id}"),
+        ],
+      ),
     );
   }
 }

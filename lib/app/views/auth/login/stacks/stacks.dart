@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+
+import 'package:call_me/core/services/firebase/services/auth_base.dart';
+
+import '../../../../../core/locator/locator.dart';
+import '../../../../../core/services/firebase/services/services.dart';
 import '../../../../components/common/widget_buttons.dart';
 import '../../../../components/common/widgets_text.dart';
 import '../../../../components/common/widgets_text_controller.dart';
@@ -7,10 +12,10 @@ import '../../../../navigation/navigation.dart';
 import '../../forgot_password/forgot_password.dart';
 import '../../view_register/register.dart';
 
-class LoginAnonimStack extends StatelessWidget {
-  const LoginAnonimStack({Key? key}) : super(key: key);
+class LoginAnonimStack extends StatelessWidget {  
   @override
   Widget build(BuildContext context) {
+    AuthBase authService = locator<FirebaseAuthService>();
     return Row(
       children: [
         const CustomTextWidget(
@@ -18,9 +23,7 @@ class LoginAnonimStack extends StatelessWidget {
           fontSize: 16,
         ),
         TextButton(
-          onPressed: () async {
-            
-          },
+          onPressed: () async => await authService.signinAnonim(),
           child: const CustomTextWidget(
             text: "Login",
             fontSize: 16,
@@ -102,9 +105,7 @@ class LoginWithEmailPasswordStack extends StatelessWidget {
             fontSize: 16,
             buttonHeigth: 40,
             buttonWidth: MediaQuery.of(context).size.width,
-            onPressed: () async {
-
-            },
+            onPressed: () async {},
           ),
         ],
       ),
