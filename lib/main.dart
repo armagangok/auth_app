@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(primarySwatch: Colors.orange),
       home: ChangeNotifierProvider(
         create: (BuildContext context) => UserModel(),
-        child:  RootView(),
+        child:  const RootView(),
       ),
     );
   }

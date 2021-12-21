@@ -1,4 +1,4 @@
-package com.example.call_me_dude
+package com.example.auth_app
 
 import io.flutter.embedding.android.FlutterActivity
 

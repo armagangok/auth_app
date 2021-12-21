@@ -13,6 +13,7 @@ class LoginAnonimStack extends StatelessWidget {
   const LoginAnonimStack({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    
     final _userModel = Provider.of<UserModel>(context);
     return Row(
       children: [
@@ -30,16 +31,18 @@ class LoginWithConnectionStack extends StatelessWidget {
   const LoginWithConnectionStack({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final _userModel = Provider.of<UserModel>(context);
     return Row(
       children: [
         LoginIconButton(
-          icon: Image.asset("assets/images/google.png"),
+          icon: const Icon(Icons.golf_course_outlined),
+          onPressed: () async => await _userModel.signInByGoogle(),
         ),
-        LoginIconButton(
-          icon: Image.asset("assets/images/apple.png"),
+        const LoginIconButton(
+          icon: Icon(Icons.ac_unit_outlined),
         ),
-        LoginIconButton(
-          icon: Image.asset("assets/images/fb.png"),
+        const LoginIconButton(
+          icon: Icon(Icons.ac_unit_outlined),
         ),
       ],
     );

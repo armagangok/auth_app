@@ -45,4 +45,15 @@ class DummyService implements AuthBase {
       return null;
     }
   }
+
+  @override
+  Future<RenewedUser?> signInByGoogle()async {
+    try {
+      UserCredential authCredential = await _firebaseAuth.signInAnonymously();
+      return _userFromFirebase(authCredential.user);
+    } catch (e) {
+      debugPrint("$e");
+      return null;
+    }
+  }
 }

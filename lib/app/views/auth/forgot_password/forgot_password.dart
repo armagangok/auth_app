@@ -5,7 +5,6 @@ import '../../../components/common/widgets_text_controller.dart';
 import '../../../components/common/widgets_text_form_field.dart';
 import '../../../components/stacks/stacks.dart';
 
-
 class ForgotPasswordView extends StatelessWidget {
   const ForgotPasswordView({Key? key}) : super(key: key);
 
@@ -29,14 +28,13 @@ class ForgotPasswordView extends StatelessWidget {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-               CustomTextButton(
+            children: const [
+              CustomTextButton(
                 text: "Send link to email.",
                 // onPressed: () => authService.resetPassword(),
               ),
             ],
           ),
-
           const SizedBox(height: 20),
         ],
       ),

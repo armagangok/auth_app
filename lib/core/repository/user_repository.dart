@@ -17,7 +17,7 @@ class UserRepository implements AuthBase {
     if (appMode == AppMode.debug) {
       return _dummyAuthService.currentUser();
     } else {
-      return _authService.currentUser();
+      return  _authService.currentUser();
     }
   }
 
@@ -26,7 +26,7 @@ class UserRepository implements AuthBase {
     if (appMode == AppMode.debug) {
       return await _dummyAuthService.signOut();
     } else {
-      return _authService.signOut();
+      return await _authService.signOut();
     }
   }
 
@@ -35,7 +35,16 @@ class UserRepository implements AuthBase {
     if (appMode == AppMode.debug) {
       await _dummyAuthService.signinAnonim();
     } else {
-      return _authService.signinAnonim();
+      return await _authService.signinAnonim();
+    }
+  }
+
+  @override
+  Future<RenewedUser?> signInByGoogle() async {
+    if (appMode == AppMode.debug) {
+      await _dummyAuthService.signInByGoogle();
+    } else {
+      return await _authService.signInByGoogle();
     }
   }
 }

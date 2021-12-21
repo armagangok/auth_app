@@ -67,15 +67,15 @@ class RegisterWithConnectionStack extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: [
+      children: const [
         LoginIconButton(
-          icon: Image.asset("assets/images/google.png"),
+          icon: Icon(Icons.ac_unit_outlined),
         ),
         LoginIconButton(
-          icon: Image.asset("assets/images/apple.png"),
+          icon: Icon(Icons.ac_unit_outlined),
         ),
         LoginIconButton(
-          icon: Image.asset("assets/images/fb.png"),
+          icon: Icon(Icons.ac_unit_outlined),
         ),
       ],
     );

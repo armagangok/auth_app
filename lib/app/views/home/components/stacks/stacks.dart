@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:call_me/app/components/common/widgets_text.dart';
 import 'package:provider/provider.dart';
 import '../../../../../core/viewmodels/user_model.dart';
+import '../../../../components/common/widgets_text.dart';
 
 class CustomDrawerWidget extends StatelessWidget {
+  const   CustomDrawerWidget({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    final _userModel = Provider.of<UserModel>(context);
+    final UserModel _userModel = Provider.of<UserModel>(context);
 
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.5,

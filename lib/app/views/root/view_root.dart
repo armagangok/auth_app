@@ -5,18 +5,19 @@ import '../auth/login/login.dart';
 import '../home/view_home.dart';
 
 class RootView extends StatelessWidget {
-  RootView({Key? key}) : super(key: key);
+  const RootView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final UserModel _userModel = Provider.of<UserModel>(context);
+
     if (_userModel.state == ViewState.idle) {
-      if (_userModel.user == null) {
-        debugPrint("user is null");
-        return LoginView();
-      } else {
+      if (_userModel.user != null) {
         debugPrint("user is not null");
-        return HomeView();
+        return const HomeView();
+      } else {
+        debugPrint("user is  null");
+        return const LoginView();
       }
     } else {
       return const Scaffold(
@@ -27,17 +28,3 @@ class RootView extends StatelessWidget {
     }
   }
 }
-
-
-
-
-
-    //     if (_userModel.user == null) {
-    //   debugPrint("user is null");
-    //   debugPrint("user in build method => ${_userModel.user?.id}");
-    //   return LoginView();
-    // } else {
-    //   debugPrint(
-    //       "user in build method => [${_userModel.user?.id}]  is not null");
-    //   return HomeView();
-    // }

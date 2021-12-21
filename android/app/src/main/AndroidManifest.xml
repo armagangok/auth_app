@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.call_me_dude">
+    package="com.example.auth_app">
    <application
-        android:label="call_me_dude"
+        android:label="auth_app"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

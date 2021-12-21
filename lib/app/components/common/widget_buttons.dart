@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class LoginIconButton extends StatelessWidget {
-  final Image? icon;
+  final Icon icon;
   final Function? onPressed;
   const LoginIconButton({
     Key? key,
@@ -12,7 +12,7 @@ class LoginIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: icon!,
+      icon: icon,
       iconSize: 50,
       onPressed: () => onPressed!(),
     );

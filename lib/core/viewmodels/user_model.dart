@@ -65,4 +65,18 @@ class UserModel with ChangeNotifier implements AuthBase {
       state = ViewState.idle;
     }
   }
+
+  @override
+  Future<RenewedUser?> signInByGoogle() async {
+    try {
+      state = ViewState.busy;
+      _user = await _userRepository.signInByGoogle();
+      return _user;
+    } catch (e) {
+      debugPrint("Error in viewmodel, at signOut() method. \n [$e]");
+      return null;
+    } finally {
+      state = ViewState.idle;
+    }
+  }
 }
