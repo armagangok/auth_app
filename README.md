@@ -1,6 +1,6 @@
 ## I have learnt:
 
-*  How to implement firebase in flutter a project.
+*  How to implement firebase in a flutter project.
 *  State management with provider.
 *  Network, repository, viewmodel layers in MVVM architecture.
 *  Reusable common widgets.
