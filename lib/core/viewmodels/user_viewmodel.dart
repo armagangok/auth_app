@@ -98,15 +98,17 @@ class UserModel with ChangeNotifier implements AuthBase {
   @override
   Future<RenewedUser?> signInByEmailPassword(
       String email, String password) async {
-    try {
-      state = ViewState.busy;
-      _user = await _userRepository.signInByEmailPassword(email, password);
-      return _user;
-    } catch (e) {
-      debugPrint("Error in viewmodel, at signOut() method. \n [$e]");
-      return null;
-    } finally {
-      state = ViewState.idle;
-    }
+    if (email.length >= 6 || password.length >= 6) {
+      try {
+        state = ViewState.busy;
+        _user = await _userRepository.signInByEmailPassword(email, password);
+        return _user;
+      } catch (e) {
+        debugPrint("Error in viewmodel, at signOut() method. \n [$e]");
+        return null;
+      } finally {
+        state = ViewState.idle;
+      }
+    } else {}
   }
 }

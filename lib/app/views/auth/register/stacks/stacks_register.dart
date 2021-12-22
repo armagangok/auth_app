@@ -46,10 +46,12 @@ class RegisterWithEmailPasswordStack extends StatelessWidget {
           fontSize: 16,
           buttonWidth: MediaQuery.of(context).size.width,
           buttonHeigth: 40,
-          onPressed: () async => await _userViewModel.createUserByEmailPassword(
-            textControllers.emailRegister,
-            textControllers.passwordRegister1,
-          ),
+          onPressed: () async => {
+            await _userViewModel.createUserByEmailPassword(
+              textControllers.emailRegister.text,
+              textControllers.passwordRegister1.text,
+            ),
+          },
         ),
       ],
     );
