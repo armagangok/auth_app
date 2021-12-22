@@ -1,5 +1,5 @@
 import '../locator/locator.dart';
-import '../services/firebase/auth/models/user_model.dart';
+import '../services/firebase/models/user_model.dart';
 import '../services/firebase/services/auth_base.dart';
 import '../services/firebase/services/dummy_service.dart';
 import '../services/firebase/services/services.dart';
@@ -17,7 +17,7 @@ class UserRepository implements AuthBase {
     if (appMode == AppMode.debug) {
       return _dummyAuthService.currentUser();
     } else {
-      return  _authService.currentUser();
+      return _authService.currentUser();
     }
   }
 
@@ -45,6 +45,26 @@ class UserRepository implements AuthBase {
       await _dummyAuthService.signInByGoogle();
     } else {
       return await _authService.signInByGoogle();
+    }
+  }
+
+  @override
+  Future<RenewedUser?> signInByEmailPassword(
+      String email, String password) async {
+    if (appMode == AppMode.debug) {
+      await _dummyAuthService.signInByEmailPassword(email, password);
+    } else {
+      return await _authService.signInByEmailPassword(email, password);
+    }
+  }
+
+  @override
+  Future<RenewedUser?> createUserByEmailPassword(
+      String email, String password) async {
+    if (appMode == AppMode.debug) {
+      await _dummyAuthService.createUserByEmailPassword(email, password);
+    } else {
+      return await _authService.createUserByEmailPassword(email, password);
     }
   }
 }

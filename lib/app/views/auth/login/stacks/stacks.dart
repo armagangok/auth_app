@@ -1,19 +1,20 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../../../core/viewmodels/user_model.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../../view_register/register.dart';
+import '../../../../navigation/navigation.dart';
+import '../../forgot_password/forgot_password.dart';
+import '../../../../../core/viewmodels/user_viewmodel.dart';
 import '../../../../components/common/widget_buttons.dart';
 import '../../../../components/common/widgets_text.dart';
 import '../../../../components/common/widgets_text_controller.dart';
 import '../../../../components/common/widgets_text_form_field.dart';
-import '../../../../navigation/navigation.dart';
-import '../../forgot_password/forgot_password.dart';
-import '../../view_register/register.dart';
 
 class LoginAnonimStack extends StatelessWidget {
   const LoginAnonimStack({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    
     final _userModel = Provider.of<UserModel>(context);
     return Row(
       children: [
@@ -35,14 +36,17 @@ class LoginWithConnectionStack extends StatelessWidget {
     return Row(
       children: [
         LoginIconButton(
-          icon: const Icon(Icons.golf_course_outlined),
+          icon: const FaIcon(
+            FontAwesomeIcons.google,
+            color: Color.fromARGB(255, 7, 223, 0),
+          ),
           onPressed: () async => await _userModel.signInByGoogle(),
         ),
-        const LoginIconButton(
-          icon: Icon(Icons.ac_unit_outlined),
+        LoginIconButton(
+          icon: FaIcon(FontAwesomeIcons.apple, color: Colors.grey[600]),
         ),
-        const LoginIconButton(
-          icon: Icon(Icons.ac_unit_outlined),
+        LoginIconButton(
+          icon: FaIcon(FontAwesomeIcons.facebook, color: Colors.blue[800]),
         ),
       ],
     );
@@ -75,16 +79,31 @@ class LoginWithEmailPasswordStack extends StatelessWidget {
   const LoginWithEmailPasswordStack({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final UserModel _userViewModel = Provider.of<UserModel>(context);
     return Form(
       child: Column(
         children: [
           Row(children: const [CustomTextWidget(text: "Login", fontSize: 36)]),
           const SizedBox(height: 40),
           Row(children: const [Text("Email")]),
-          TextFormFieldWidget(valueCatcher: textControllers.setEmailLogin),
+          TextFormFieldWidget(
+            inputType: TextInputType.emailAddress,
+            valueCatcher: textControllers.setEmailLogin,
+            icon: const Icon(
+              CupertinoIcons.mail,
+              color: Colors.black,
+            ),
+          ),
           const SizedBox(height: 20),
           Row(children: const [Text("Password")]),
-          TextFormFieldWidget(valueCatcher: textControllers.setpasswordLogin),
+          TextFormFieldWidget(
+            isObsecure: true,
+            valueCatcher: textControllers.setpasswordLogin,
+            icon: const Icon(
+              CupertinoIcons.eye,
+              color: Colors.black,
+            ),
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -100,7 +119,10 @@ class LoginWithEmailPasswordStack extends StatelessWidget {
             fontSize: 16,
             buttonHeigth: 40,
             buttonWidth: MediaQuery.of(context).size.width,
-            onPressed: () async {},
+            onPressed: () async => await _userViewModel.signInByEmailPassword(
+              textControllers.emailLogin.text,
+              textControllers.passwordLogin.text,
+            ),
           ),
         ],
       ),

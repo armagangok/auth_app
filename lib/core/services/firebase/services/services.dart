@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import '../auth/models/user_model.dart';
+import '../models/user_model.dart';
 import 'auth_base.dart';
 
 class FirebaseAuthService implements AuthBase {
@@ -35,10 +35,12 @@ class FirebaseAuthService implements AuthBase {
       }
 
       if (_firebaseAuth.currentUser?.isAnonymous == true) {
-        debugPrint("anonim user state: ${_firebaseAuth.currentUser?.isAnonymous}");
+        debugPrint(
+            "anonim user state: ${_firebaseAuth.currentUser?.isAnonymous}");
         await _firebaseAuth.currentUser?.delete();
       } else {
-        debugPrint("anonim user state: ${_firebaseAuth.currentUser?.isAnonymous}");
+        debugPrint(
+            "anonim user state: ${_firebaseAuth.currentUser?.isAnonymous}");
       }
       await _firebaseAuth.signOut();
       return true;
@@ -79,6 +81,38 @@ class FirebaseAuthService implements AuthBase {
         return null;
       }
     } else {
+      return null;
+    }
+  }
+
+  @override
+  Future<RenewedUser?> createUserByEmailPassword(
+      String email, String password) async {
+    try {
+      UserCredential authCredential =
+          await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      return _userFromFirebase(authCredential.user);
+    } catch (e) {
+      debugPrint("Error in services: [$e]");
+      return null;
+    }
+  }
+
+  @override
+  Future<RenewedUser?> signInByEmailPassword(
+      String email, String password) async {
+    try {
+      UserCredential authCredential =
+          await _firebaseAuth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      return _userFromFirebase(authCredential.user);
+    } catch (e) {
+      debugPrint("Error in services: [$e]");
       return null;
     }
   }

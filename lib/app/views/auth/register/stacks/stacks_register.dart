@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+import '../../../../../core/viewmodels/user_viewmodel.dart';
 import '../../../../components/common/widget_buttons.dart';
 import '../../../../components/common/widgets_text.dart';
 import '../../../../components/common/widgets_text_controller.dart';
@@ -9,15 +12,21 @@ class RegisterWithEmailPasswordStack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    UserModel _userViewModel = Provider.of<UserModel>(context);
     return Column(
       children: [
         Row(children: const [CustomTextWidget(text: "Register", fontSize: 36)]),
         const SizedBox(height: 37),
         Row(children: const [Text("Username")]),
-        TextFormFieldWidget(valueCatcher: textControllers.setusernameRegister),
+        TextFormFieldWidget(
+          valueCatcher: textControllers.setusernameRegister,
+        ),
         const SizedBox(height: 20),
         Row(children: const [Text("Email")]),
-        TextFormFieldWidget(valueCatcher: textControllers.setemailRegister),
+        TextFormFieldWidget(
+          valueCatcher: textControllers.setemailRegister,
+          inputType: TextInputType.emailAddress,
+        ),
         const SizedBox(height: 20),
         Row(children: const [Text("Password")]),
         TextFormFieldWidget(
@@ -37,24 +46,10 @@ class RegisterWithEmailPasswordStack extends StatelessWidget {
           fontSize: 16,
           buttonWidth: MediaQuery.of(context).size.width,
           buttonHeigth: 40,
-          onPressed: () async {
-            // await register.registerEmailAndPassword(
-            //   textControllers.emailRegister.text,
-            //   textControllers.passwordRegister1.text,
-            //   textControllers.passwordRegister2.text,
-            //   context,
-            // );
-
-            // if (await verification.verify() == true) {
-            //   debugPrint("trueeeeee");
-            //   getTo(context, const HomeView());
-            // } else {
-            //   debugPrint("falseeeeee");
-            //   return const Scaffold(
-            //     body: Center(child: CircularProgressIndicator()),
-            //   );
-            // }
-          },
+          onPressed: () async => await _userViewModel.createUserByEmailPassword(
+            textControllers.emailRegister,
+            textControllers.passwordRegister1,
+          ),
         ),
       ],
     );
@@ -67,15 +62,24 @@ class RegisterWithConnectionStack extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      children: const [
-        LoginIconButton(
-          icon: Icon(Icons.ac_unit_outlined),
+      children: [
+        const LoginIconButton(
+          icon: FaIcon(
+            FontAwesomeIcons.google,
+            color: Color.fromARGB(255, 0, 206, 7),
+          ),
         ),
         LoginIconButton(
-          icon: Icon(Icons.ac_unit_outlined),
+          icon: FaIcon(
+            FontAwesomeIcons.apple,
+            color: Colors.grey[700],
+          ),
         ),
         LoginIconButton(
-          icon: Icon(Icons.ac_unit_outlined),
+          icon: FaIcon(
+            FontAwesomeIcons.facebook,
+            color: Colors.blue[800],
+          ),
         ),
       ],
     );

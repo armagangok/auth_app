@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class LoginIconButton extends StatelessWidget {
-  final Icon icon;
+  final FaIcon icon;
   final Function? onPressed;
   const LoginIconButton({
     Key? key,
@@ -13,7 +14,7 @@ class LoginIconButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return IconButton(
       icon: icon,
-      iconSize: 50,
+      iconSize: 40,
       onPressed: () => onPressed!(),
     );
   }

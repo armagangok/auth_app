@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../auth/models/user_model.dart';
+import '../models/user_model.dart';
 import 'auth_base.dart';
 
 class DummyService implements AuthBase {
@@ -55,5 +55,17 @@ class DummyService implements AuthBase {
       debugPrint("$e");
       return null;
     }
+  }
+
+  @override
+  Future<RenewedUser?> signInByEmailPassword(String email, String password) {
+    // TODO: implement signInByEmailPassword
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<RenewedUser?> createUserByEmailPassword(String email, String password) {
+    // TODO: implement createUserByEmailPassword
+    throw UnimplementedError();
   }
 }

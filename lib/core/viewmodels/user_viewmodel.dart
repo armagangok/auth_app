@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../locator/locator.dart';
 import '../repository/user_repository.dart';
-import '../services/firebase/auth/models/user_model.dart';
+import '../services/firebase/models/user_model.dart';
 import '../services/firebase/services/auth_base.dart';
 
 enum ViewState { idle, busy }
@@ -71,6 +71,36 @@ class UserModel with ChangeNotifier implements AuthBase {
     try {
       state = ViewState.busy;
       _user = await _userRepository.signInByGoogle();
+      return _user;
+    } catch (e) {
+      debugPrint("Error in viewmodel, at signOut() method. \n [$e]");
+      return null;
+    } finally {
+      state = ViewState.idle;
+    }
+  }
+
+  @override
+  Future<RenewedUser?> createUserByEmailPassword(
+      String email, String password) async {
+    try {
+      state = ViewState.busy;
+      _user = await _userRepository.createUserByEmailPassword(email, password);
+      return _user;
+    } catch (e) {
+      debugPrint("Error in viewmodel, at signOut() method. \n [$e]");
+      return null;
+    } finally {
+      state = ViewState.idle;
+    }
+  }
+
+  @override
+  Future<RenewedUser?> signInByEmailPassword(
+      String email, String password) async {
+    try {
+      state = ViewState.busy;
+      _user = await _userRepository.signInByEmailPassword(email, password);
       return _user;
     } catch (e) {
       debugPrint("Error in viewmodel, at signOut() method. \n [$e]");

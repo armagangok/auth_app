@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'app/views/root/view_root.dart';
 import 'core/initializing/initialize_app.dart';
-import 'core/viewmodels/user_model.dart';
+import 'core/viewmodels/user_viewmodel.dart';
 
 void main() async {
   await initApp();
