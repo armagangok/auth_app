@@ -6,7 +6,7 @@ import '../services/firebase/services/auth_base.dart';
 
 enum ViewState { idle, busy }
 
-class UserModel with ChangeNotifier implements AuthBase {
+class UserViewModel with ChangeNotifier implements AuthBase {
   final UserRepository _userRepository = locator<UserRepository>();
 
   RenewedUser? _user;
@@ -19,7 +19,7 @@ class UserModel with ChangeNotifier implements AuthBase {
     notifyListeners();
   }
 
-  UserModel() {
+  UserViewModel() {
     currentUser();
   }
 
@@ -57,9 +57,10 @@ class UserModel with ChangeNotifier implements AuthBase {
     try {
       state = ViewState.busy;
       _user = await _userRepository.signinAnonim();
+      debugPrint("userViewModel user:  $_user");
       return _user;
     } catch (e) {
-      debugPrint("Error in viewmodel, at signOut() method. \n [$e]");
+      debugPrint("Error in viewmodel, signinAnonim() method. \n [$e]");
       return null;
     } finally {
       state = ViewState.idle;
@@ -73,7 +74,7 @@ class UserModel with ChangeNotifier implements AuthBase {
       _user = await _userRepository.signInByGoogle();
       return _user;
     } catch (e) {
-      debugPrint("Error in viewmodel, at signOut() method. \n [$e]");
+      debugPrint("Error in UserVievModel, at signInByGoogle() method. \n [$e]");
       return null;
     } finally {
       state = ViewState.idle;
@@ -82,13 +83,47 @@ class UserModel with ChangeNotifier implements AuthBase {
 
   @override
   Future<RenewedUser?> createUserByEmailPassword(
-      String email, String password) async {
+    String email,
+    String password1,
+    String password2,
+  ) async {
+    if (password1.length < 7 && password2.length < 7) {
+      debugPrint("Please make sure you input longer then 6 characters.");
+    } else if (password2 != password1) {
+      debugPrint("Passwords are not same!");
+    } else {
+      try {
+        state = ViewState.busy;
+        _user = await _userRepository.createUserByEmailPassword(
+          email,
+          password1,
+          password2,
+        );
+        await verifyMail();
+
+        return _user;
+      } catch (e) {
+        debugPrint(
+            "Error in UserVievModel, at createUserByEmailPassword() method. \n [$e]");
+        return null;
+      } finally {
+        state = ViewState.idle;
+      }
+    }
+  }
+
+  @override
+  Future<RenewedUser?> signInByEmailPassword(
+    String email,
+    String password,
+  ) async {
     try {
       state = ViewState.busy;
-      _user = await _userRepository.createUserByEmailPassword(email, password);
+      _user = await _userRepository.signInByEmailPassword(email, password);
       return _user;
     } catch (e) {
-      debugPrint("Error in viewmodel, at signOut() method. \n [$e]");
+      debugPrint(
+          "Error in UserVievModel, at signInByEmailPassword() method. \n [$e]");
       return null;
     } finally {
       state = ViewState.idle;
@@ -96,19 +131,22 @@ class UserModel with ChangeNotifier implements AuthBase {
   }
 
   @override
-  Future<RenewedUser?> signInByEmailPassword(
-      String email, String password) async {
-    if (email.length >= 6 || password.length >= 6) {
-      try {
-        state = ViewState.busy;
-        _user = await _userRepository.signInByEmailPassword(email, password);
-        return _user;
-      } catch (e) {
-        debugPrint("Error in viewmodel, at signOut() method. \n [$e]");
-        return null;
-      } finally {
-        state = ViewState.idle;
-      }
-    } else {}
+  bool? isVerified() {
+    return _userRepository.isVerified();
+  }
+
+  @override
+  Future<void> verifyMail() async {
+    try {
+      await _userRepository.verifyMail();
+    } catch (e) {
+      debugPrint("Error in UserVievModel, at verifyMail() method. \n [$e]");
+    }
+  }
+
+  @override
+  bool? isAnonim() {
+    debugPrint("UserVievModel , at isANonim \n ${_userRepository.isAnonim()}");
+    return _userRepository.isAnonim();
   }
 }

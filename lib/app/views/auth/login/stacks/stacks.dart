@@ -15,7 +15,7 @@ class LoginAnonimStack extends StatelessWidget {
   const LoginAnonimStack({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final _userModel = Provider.of<UserModel>(context);
+    final _userModel = Provider.of<UserViewModel>(context);
     return Row(
       children: [
         const CustomTextWidget(text: "Login anonymously!", fontSize: 16),
@@ -32,7 +32,7 @@ class LoginWithConnectionStack extends StatelessWidget {
   const LoginWithConnectionStack({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final _userModel = Provider.of<UserModel>(context);
+    final _userModel = Provider.of<UserViewModel>(context);
     return Row(
       children: [
         LoginIconButton(
@@ -79,7 +79,7 @@ class LoginWithEmailPasswordStack extends StatelessWidget {
   const LoginWithEmailPasswordStack({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final UserModel _userViewModel = Provider.of<UserModel>(context);
+    final UserViewModel _userViewModel = Provider.of<UserViewModel>(context);
     return Form(
       child: Column(
         children: [

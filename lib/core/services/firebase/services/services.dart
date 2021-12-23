@@ -45,7 +45,7 @@ class FirebaseAuthService implements AuthBase {
       await _firebaseAuth.signOut();
       return true;
     } catch (e) {
-      debugPrint("$e");
+      debugPrint("error in services at signOut: [$e]");
       return false;
     }
   }
@@ -56,7 +56,7 @@ class FirebaseAuthService implements AuthBase {
       UserCredential authCredential = await _firebaseAuth.signInAnonymously();
       return _userFromFirebase(authCredential.user);
     } catch (e) {
-      debugPrint("$e");
+      debugPrint("Error in Services, at siginAnonim [$e]");
       return null;
     }
   }
@@ -87,16 +87,19 @@ class FirebaseAuthService implements AuthBase {
 
   @override
   Future<RenewedUser?> createUserByEmailPassword(
-      String email, String password) async {
+    String email,
+    String password1,
+    String? password2,
+  ) async {
     try {
       UserCredential authCredential =
           await _firebaseAuth.createUserWithEmailAndPassword(
         email: email,
-        password: password,
+        password: password1,
       );
       return _userFromFirebase(authCredential.user);
     } catch (e) {
-      debugPrint("Error in services: [$e]");
+      debugPrint("Error in services, at createUserWithEmailAndPassword: [$e]");
       return null;
     }
   }
@@ -105,6 +108,8 @@ class FirebaseAuthService implements AuthBase {
   Future<RenewedUser?> signInByEmailPassword(
       String email, String password) async {
     try {
+      debugPrint(
+          "DEBUG in FirebaseAuthService at signInByEmailPassword. \n  S${_firebaseAuth.currentUser?.emailVerified}");
       UserCredential authCredential =
           await _firebaseAuth.signInWithEmailAndPassword(
         email: email,
@@ -112,8 +117,25 @@ class FirebaseAuthService implements AuthBase {
       );
       return _userFromFirebase(authCredential.user);
     } catch (e) {
-      debugPrint("Error in services: [$e]");
+      debugPrint("Error in services, signInWithEmailAndPassword: [$e]");
       return null;
     }
+  }
+
+  @override
+  bool? isVerified() {
+    bool? isVerified = _firebaseAuth.currentUser?.emailVerified;
+    return isVerified;
+  }
+
+  @override
+  Future<void> verifyMail() async {
+    await _firebaseAuth.currentUser?.sendEmailVerification();
+  }
+
+  @override
+  bool? isAnonim() {
+    debugPrint("isAnonim: [${_firebaseAuth.currentUser?.isAnonymous}]");
+    return _firebaseAuth.currentUser?.isAnonymous;
   }
 }

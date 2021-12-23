@@ -8,7 +8,7 @@ class CustomDrawerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final UserModel _userModel = Provider.of<UserModel>(context);
+    final UserViewModel _userModel = Provider.of<UserViewModel>(context);
 
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.5,

@@ -12,7 +12,7 @@ class RegisterWithEmailPasswordStack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    UserModel _userViewModel = Provider.of<UserModel>(context);
+    UserViewModel _userViewModel = Provider.of<UserViewModel>(context);
     return Column(
       children: [
         Row(children: const [CustomTextWidget(text: "Register", fontSize: 36)]),
@@ -50,7 +50,9 @@ class RegisterWithEmailPasswordStack extends StatelessWidget {
             await _userViewModel.createUserByEmailPassword(
               textControllers.emailRegister.text,
               textControllers.passwordRegister1.text,
+              textControllers.passwordRegister2.text,
             ),
+            
           },
         ),
       ],

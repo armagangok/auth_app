@@ -8,7 +8,7 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final UserModel _userModel = Provider.of<UserModel>(context);
+    final UserViewModel _userModel = Provider.of<UserViewModel>(context);
     return Scaffold(
       drawer: const CustomDrawerWidget(),
       appBar: AppBar(title: const Text("Home Screen!")),

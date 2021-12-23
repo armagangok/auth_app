@@ -10,7 +10,7 @@ class RegisterView extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: const <Widget>[
-          RegisterWithEmailPasswordStack(),          
+          RegisterWithEmailPasswordStack(),
           SizedBox(height: 20),
           RegisterWithConnectionStack(),
         ],

@@ -47,7 +47,7 @@ class DummyService implements AuthBase {
   }
 
   @override
-  Future<RenewedUser?> signInByGoogle()async {
+  Future<RenewedUser?> signInByGoogle() async {
     try {
       UserCredential authCredential = await _firebaseAuth.signInAnonymously();
       return _userFromFirebase(authCredential.user);
@@ -58,14 +58,32 @@ class DummyService implements AuthBase {
   }
 
   @override
-  Future<RenewedUser?> signInByEmailPassword(String email, String password) {
-    // TODO: implement signInByEmailPassword
-    throw UnimplementedError();
+  Future<RenewedUser?> signInByEmailPassword(
+      String email, String password) async {
+    return RenewedUser(id: "randomID3987428374", email: "test@test.com");
   }
 
   @override
-  Future<RenewedUser?> createUserByEmailPassword(String email, String password) {
-    // TODO: implement createUserByEmailPassword
-    throw UnimplementedError();
+  Future<RenewedUser?> createUserByEmailPassword(
+    String email,
+    String? password1,
+    String password2,
+  ) async {
+    return RenewedUser(id: "randomID3987428374", email: "test@test.com");
+  }
+
+  @override
+  bool? isVerified() {
+    return true;
+  }
+
+  @override
+  Future<bool> verifyMail() async {
+    return await Future.value(true);
+  }
+
+  @override
+  bool? isAnonim() {
+    return true;
   }
 }

@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (BuildContext context) => UserModel(),
+      create: (BuildContext context) => UserViewModel(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(primarySwatch: Colors.orange),

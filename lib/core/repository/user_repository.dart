@@ -50,7 +50,9 @@ class UserRepository implements AuthBase {
 
   @override
   Future<RenewedUser?> signInByEmailPassword(
-      String email, String password) async {
+    String email,
+    String password,
+  ) async {
     if (appMode == AppMode.debug) {
       await _dummyAuthService.signInByEmailPassword(email, password);
     } else {
@@ -60,11 +62,43 @@ class UserRepository implements AuthBase {
 
   @override
   Future<RenewedUser?> createUserByEmailPassword(
-      String email, String password) async {
+    String email,
+    String password1,
+    String password2,
+  ) async {
     if (appMode == AppMode.debug) {
-      await _dummyAuthService.createUserByEmailPassword(email, password);
+      await _dummyAuthService.createUserByEmailPassword(
+          email, password1, password2);
     } else {
-      return await _authService.createUserByEmailPassword(email, password);
+      return await _authService.createUserByEmailPassword(
+          email, password1, password2);
+    }
+  }
+
+  @override
+  bool? isVerified() {
+    if (appMode == AppMode.debug) {
+      return _dummyAuthService.isVerified();
+    } else {
+      return _authService.isVerified();
+    }
+  }
+
+  @override
+  Future<void> verifyMail() async {
+    if (appMode == AppMode.debug) {
+      await _dummyAuthService.verifyMail();
+    } else {
+      await _authService.verifyMail();
+    }
+  }
+
+  @override
+  bool? isAnonim() {
+    if (appMode == AppMode.debug) {
+      _dummyAuthService.isAnonim();
+    } else {
+      return _authService.isAnonim();
     }
   }
 }
