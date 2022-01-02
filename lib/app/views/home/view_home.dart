@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../core/remote/firebase/viewmodels/user_viewmodel.dart';
+import '../../../core/remote/firebase/auth/viewmodels/user_viewmodel.dart';
 import 'components/stacks/stacks.dart';
 
 class HomeView extends StatelessWidget {

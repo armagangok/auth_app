@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import '../../../../../core/remote/firebase/viewmodels/user_viewmodel.dart';
+
+import '../../../../../core/remote/firebase/auth/viewmodels/user_viewmodel.dart';
 import '../../../../components/common/widget_buttons.dart';
 import '../../../../components/common/widgets_text.dart';
 import '../../../../components/common/widgets_text_controller.dart';
@@ -12,7 +13,7 @@ class RegisterWithEmailPasswordStack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    UserViewModel _userViewModel = Provider.of<UserViewModel>(context);
+    final UserViewModel _userViewModel = Provider.of<UserViewModel>(context);
     return Column(
       children: [
         Row(children: const [CustomTextWidget(text: "Register", fontSize: 36)]),
@@ -52,7 +53,6 @@ class RegisterWithEmailPasswordStack extends StatelessWidget {
               textControllers.passwordRegister1.text,
               textControllers.passwordRegister2.text,
             ),
-            
           },
         ),
       ],

@@ -1,7 +1,9 @@
 import 'package:get_it/get_it.dart';
+
+import '../remote/firebase/auth/repository/user_repository.dart';
 import '../remote/firebase/auth/services/dummy_service.dart';
 import '../remote/firebase/auth/services/services.dart';
-import '../remote/firebase/repository/user_repository.dart';
+
 
 final GetIt locator = GetIt.asNewInstance();
 
