@@ -5,7 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../view_register/register.dart';
 import '../../../../navigation/navigation.dart';
 import '../../forgot_password/forgot_password.dart';
-import '../../../../../core/viewmodels/user_viewmodel.dart';
+import '../../../../../core/remote/firebase/viewmodels/user_viewmodel.dart';
 import '../../../../components/common/widget_buttons.dart';
 import '../../../../components/common/widgets_text.dart';
 import '../../../../components/common/widgets_text_controller.dart';

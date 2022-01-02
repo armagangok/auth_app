@@ -1,8 +1,9 @@
-import '../locator/locator.dart';
-import '../services/firebase/models/user_model.dart';
-import '../services/firebase/services/auth_base.dart';
-import '../services/firebase/services/dummy_service.dart';
-import '../services/firebase/services/services.dart';
+import '../../../../locator/locator.dart';
+import '../models/user_model.dart';
+import '../services/auth_base.dart';
+import '../services/dummy_service.dart';
+import '../services/services.dart';
+
 
 enum AppMode { debug, release }
 
@@ -33,7 +34,7 @@ class UserRepository implements AuthBase {
   @override
   Future<RenewedUser?> signinAnonim() async {
     if (appMode == AppMode.debug) {
-      await _dummyAuthService.signinAnonim();
+      return await _dummyAuthService.signinAnonim();
     } else {
       return await _authService.signinAnonim();
     }
@@ -42,7 +43,7 @@ class UserRepository implements AuthBase {
   @override
   Future<RenewedUser?> signInByGoogle() async {
     if (appMode == AppMode.debug) {
-      await _dummyAuthService.signInByGoogle();
+      return await _dummyAuthService.signInByGoogle();
     } else {
       return await _authService.signInByGoogle();
     }
@@ -54,7 +55,7 @@ class UserRepository implements AuthBase {
     String password,
   ) async {
     if (appMode == AppMode.debug) {
-      await _dummyAuthService.signInByEmailPassword(email, password);
+      return await _dummyAuthService.signInByEmailPassword(email, password);
     } else {
       return await _authService.signInByEmailPassword(email, password);
     }
@@ -67,11 +68,17 @@ class UserRepository implements AuthBase {
     String password2,
   ) async {
     if (appMode == AppMode.debug) {
-      await _dummyAuthService.createUserByEmailPassword(
-          email, password1, password2);
+      return await   _dummyAuthService.createUserByEmailPassword(
+        email,
+        password1,
+        password2,
+      );
     } else {
       return await _authService.createUserByEmailPassword(
-          email, password1, password2);
+        email,
+        password1,
+        password2,
+      );
     }
   }
 
@@ -96,7 +103,7 @@ class UserRepository implements AuthBase {
   @override
   bool? isAnonim() {
     if (appMode == AppMode.debug) {
-      _dummyAuthService.isAnonim();
+      return _dummyAuthService.isAnonim();
     } else {
       return _authService.isAnonim();
     }

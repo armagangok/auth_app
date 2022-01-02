@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import '../locator/locator.dart';
+
+import '../../../../locator/locator.dart';
+import '../models/user_model.dart';
 import '../repository/user_repository.dart';
-import '../services/firebase/models/user_model.dart';
-import '../services/firebase/services/auth_base.dart';
+import '../services/auth_base.dart';
+
 
 enum ViewState { idle, busy }
 
@@ -89,8 +91,10 @@ class UserViewModel with ChangeNotifier implements AuthBase {
   ) async {
     if (password1.length < 7 && password2.length < 7) {
       debugPrint("Please make sure you input longer then 6 characters.");
+      return null;
     } else if (password2 != password1) {
       debugPrint("Passwords are not same!");
+      return null;
     } else {
       try {
         state = ViewState.busy;
