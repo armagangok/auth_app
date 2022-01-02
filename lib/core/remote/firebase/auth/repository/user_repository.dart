@@ -64,12 +64,15 @@ class UserRepository implements AuthBase {
 
   @override
   Future<RenewedUser?> createUserByEmailPassword(
-    String email,
-    String password1,
-    String password2,
-  ) async {
+      String email, String password1, String password2) async {
     if (appMode == AppMode.debug) {
-      final RenewedUser? _renewedUser = await _dummyAuthService
+      return await _dummyAuthService.createUserByEmailPassword(
+        email,
+        password1,
+        password2,
+      );
+    } else {
+      final RenewedUser? _renewedUser = await _authService
           .createUserByEmailPassword(email, password1, password2);
 
       bool _result = await _currentDbService.saveUser(_renewedUser!);
@@ -78,12 +81,6 @@ class UserRepository implements AuthBase {
       } else {
         return null;
       }
-    } else {
-      return await _authService.createUserByEmailPassword(
-        email,
-        password1,
-        password2,
-      );
     }
   }
 
