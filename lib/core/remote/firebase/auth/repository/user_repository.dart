@@ -1,15 +1,16 @@
 import '../../../../locator/locator.dart';
+import '../../firestore/services/current_db_service.dart';
 import '../models/user_model.dart';
 import '../services/auth_base.dart';
 import '../services/dummy_service.dart';
 import '../services/services.dart';
-
 
 enum AppMode { debug, release }
 
 class UserRepository implements AuthBase {
   final FirebaseAuthService _authService = locator<FirebaseAuthService>();
   final DummyService _dummyAuthService = locator<DummyService>();
+  final CurrentDbService _currentDbService = locator<CurrentDbService>();
 
   AppMode appMode = AppMode.release;
 
@@ -68,11 +69,15 @@ class UserRepository implements AuthBase {
     String password2,
   ) async {
     if (appMode == AppMode.debug) {
-      return await   _dummyAuthService.createUserByEmailPassword(
-        email,
-        password1,
-        password2,
-      );
+      final RenewedUser? _renewedUser = await _dummyAuthService
+          .createUserByEmailPassword(email, password1, password2);
+
+      bool _result = await _currentDbService.saveUser(_renewedUser!);
+      if (_result == true) {
+        return _renewedUser;
+      } else {
+        return null;
+      }
     } else {
       return await _authService.createUserByEmailPassword(
         email,
